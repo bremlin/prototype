@@ -69,7 +69,12 @@ public class MainController {
                 e.printStackTrace();
             }
             setIndicatorOn(mndIndicator);
+            showData(handlerXls);
         }
+    }
+
+    private void showData(HandlerXls handlerXls) {
+        wbsTree.setRoot(handlerXls.getPwbsHelper().getRoot());
     }
 
     public void close(ActionEvent actionEvent) {

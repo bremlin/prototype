@@ -16,15 +16,13 @@ public class HandlerXls {
 
     private File mndXls;
     private HashMap<String, PActivity> activityMap = new HashMap<>();
-    private PWBSHelper pwbsHelper = new PWBSHelper();
+    private PWBSHelper pwbsHelper;
 
     public HandlerXls(File mndXls) {
         this.mndXls = mndXls;
     }
 
     public void loadData() throws IOException {
-        System.out.println("lets go");
-
         FileInputStream fis = new FileInputStream(mndXls);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
@@ -35,10 +33,7 @@ public class HandlerXls {
     }
 
     private void loadWbsData(XSSFSheet sheet) {
-        for (Row row : sheet) {
-            int i = 0;
-
-        }
+        pwbsHelper = new PWBSHelper(sheet);
     }
 
     private void loadActivityData(XSSFSheet sheet) {
@@ -63,4 +58,7 @@ public class HandlerXls {
 
     }
 
+    public PWBSHelper getPwbsHelper() {
+        return pwbsHelper;
+    }
 }

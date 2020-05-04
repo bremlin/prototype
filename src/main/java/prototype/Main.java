@@ -22,4 +22,8 @@ public class Main extends Application {
 //        stage.getIcons().add(new Image("/icons/logo/logo_64x64.png"));
         stage.show();
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
