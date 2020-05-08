@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import prototype.helpers.PActivityHelper;
 import prototype.helpers.PWBSHelper;
 import prototype.objects.PActivity;
 
@@ -17,6 +18,7 @@ public class HandlerXls {
     private File mndXls;
     private HashMap<String, PActivity> activityMap = new HashMap<>();
     private PWBSHelper pwbsHelper;
+    private PActivityHelper pActivityHelper;
 
     public HandlerXls(File mndXls) {
         this.mndXls = mndXls;
@@ -37,17 +39,7 @@ public class HandlerXls {
     }
 
     private void loadActivityData(XSSFSheet sheet) {
-        int i = 0;
-        for (Row row : sheet) {
-            i++;
-            if (i > 1) {
-                int j = 0;
-                PActivity activity = new PActivity();
-                activity.setId(row.getCell(j++).getStringCellValue());
-                activity.setName(row.getCell(j++).getStringCellValue());
-                Cell cell;
-            }
-        }
+        pActivityHelper = new PActivityHelper(sheet);
     }
 
     private void loadResourceData(XSSFSheet sheet) {

@@ -20,8 +20,6 @@ public class PWBS {
         setName(row.getCell(i));
     }
 
-
-
     public Integer getObjectId() {
         return objectId;
     }
