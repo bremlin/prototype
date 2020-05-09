@@ -39,7 +39,7 @@ public class HandlerXls {
     }
 
     private void loadActivityData(XSSFSheet sheet) {
-        pActivityHelper = new PActivityHelper(sheet);
+        pActivityHelper = new PActivityHelper(sheet, pwbsHelper);
     }
 
     private void loadResourceData(XSSFSheet sheet) {
