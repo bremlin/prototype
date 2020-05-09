@@ -53,4 +53,8 @@ public class HandlerXls {
     public PWBSHelper getPwbsHelper() {
         return pwbsHelper;
     }
+
+    public PActivityHelper getpActivityHelper() {
+        return pActivityHelper;
+    }
 }

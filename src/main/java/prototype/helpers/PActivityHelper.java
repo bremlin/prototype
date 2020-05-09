@@ -50,6 +50,9 @@ public class PActivityHelper {
         if (activityMap.containsKey(pwbs.getMndId())) {
             treeItem.getChildren().addAll(activityMap.get(pwbs.getMndId()));
         }
+    }
 
+    public TreeItem getRoot() {
+        return root;
     }
 }

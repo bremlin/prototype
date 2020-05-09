@@ -182,7 +182,7 @@ public class PActivity extends PObject {
                     this.wbsId = Integer.valueOf(cell.getStringCellValue());
                     break;
                 case NUMERIC:
-                    this.wbsId = (int)cell.getNumericCellValue();
+                    this.wbsId = (int) cell.getNumericCellValue();
             }
         } else {
             this.wbsId = 0;

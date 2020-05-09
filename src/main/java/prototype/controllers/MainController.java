@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import prototype.HandlerXls;
+import prototype.utils.TreeTableUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +36,8 @@ public class MainController {
     private Image indicatorOffImage;
     private Image indicatorOnImage;
 
+    private TreeTableUtils treeTableUtils = new TreeTableUtils();
+
     @FXML
     public void initialize() {
         indicatorOffImage = new Image("/icons/red_light.gif");
@@ -47,6 +50,13 @@ public class MainController {
         primaveraIndicatorView.setFitWidth(7);
         mndIndicator.setGraphic(mndIndicatorView);
         primaveraIndicator.setGraphic(primaveraIndicatorView);
+
+        activityTreeView.getColumns().add(treeTableUtils.addColumnId());
+        activityTreeView.getColumns().add(treeTableUtils.addColumnName());
+        activityTreeView.getColumns().add(treeTableUtils.addColumnDuration());
+        activityTreeView.getColumns().add(treeTableUtils.addColumnStart());
+        activityTreeView.getColumns().add(treeTableUtils.addColumnFinish());
+        activityTreeView.getColumns().add(treeTableUtils.addColumnType());
     }
 
     private void setIndicatorOn(Label indicator) {
@@ -75,6 +85,7 @@ public class MainController {
 
     private void showData(HandlerXls handlerXls) {
         wbsTree.setRoot(handlerXls.getPwbsHelper().getRoot());
+        activityTreeView.setRoot(handlerXls.getpActivityHelper().getRoot());
     }
 
     public void close(ActionEvent actionEvent) {
