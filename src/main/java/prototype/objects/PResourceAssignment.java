@@ -12,7 +12,7 @@ public class PResourceAssignment {
 
     public PResourceAssignment(Row row) {
         int i = 0;
-        this.setId(row.getCell(i));
+        this.setId(row.getCell(i++));
         this.setType(row.getCell(i++));
         this.setValue(row.getCell(i++));
         this.setPrimary(row.getCell(i++));

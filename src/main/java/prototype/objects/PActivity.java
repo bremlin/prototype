@@ -30,7 +30,7 @@ public class PActivity extends PObject {
     public PActivity(Row row) {
         this.format = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
         int i = 0;
-        this.setId(row.getCell(i));
+        this.setId(row.getCell(i++));
         this.setName(row.getCell(i++));
         this.setWbsId(row.getCell(i++));
         this.setDuration(row.getCell(i++));

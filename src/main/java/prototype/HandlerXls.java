@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import prototype.helpers.PActivityHelper;
+import prototype.helpers.PResourceAssignmentHelper;
 import prototype.helpers.PWBSHelper;
 import prototype.objects.PActivity;
 
@@ -19,6 +20,7 @@ public class HandlerXls {
     private HashMap<String, PActivity> activityMap = new HashMap<>();
     private PWBSHelper pwbsHelper;
     private PActivityHelper pActivityHelper;
+    private PResourceAssignmentHelper pResourceAssignmentHelper;
 
     public HandlerXls(File mndXls) {
         this.mndXls = mndXls;
@@ -28,26 +30,10 @@ public class HandlerXls {
         FileInputStream fis = new FileInputStream(mndXls);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-        loadWbsData(workbook.getSheet(Main.WBS_DATA));
-        loadActivityData(workbook.getSheet(Main.ACTIVITY_DATA));
-        loadResourceData(workbook.getSheet(Main.RESOURCE_DATA));
-        loadRelationData(workbook.getSheet(Main.RELATION_DATA));
-    }
-
-    private void loadWbsData(XSSFSheet sheet) {
-        pwbsHelper = new PWBSHelper(sheet);
-    }
-
-    private void loadActivityData(XSSFSheet sheet) {
-        pActivityHelper = new PActivityHelper(sheet, pwbsHelper);
-    }
-
-    private void loadResourceData(XSSFSheet sheet) {
-
-    }
-
-    private void loadRelationData(XSSFSheet sheet) {
-
+        pwbsHelper = new PWBSHelper(workbook.getSheet(Main.WBS_DATA));
+        pActivityHelper = new PActivityHelper(workbook.getSheet(Main.ACTIVITY_DATA), pwbsHelper);
+        pResourceAssignmentHelper = new PResourceAssignmentHelper(workbook.getSheet(Main.RESOURCE_DATA));
+//        loadData(workbook.getSheet(Main.RELATION_DATA));
     }
 
     public PWBSHelper getPwbsHelper() {
@@ -56,5 +42,9 @@ public class HandlerXls {
 
     public PActivityHelper getpActivityHelper() {
         return pActivityHelper;
+    }
+
+    public PResourceAssignmentHelper getpResourceAssignmentHelper() {
+        return pResourceAssignmentHelper;
     }
 }

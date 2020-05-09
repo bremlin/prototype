@@ -3,7 +3,7 @@ package prototype.objects;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-public class PWBS {
+public class PWBS extends PObject{
 
     private Integer objectId;
     private Integer parentId;

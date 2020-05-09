@@ -31,24 +31,28 @@ public class PActivityHelper {
                 activityMap.put(activity.getWbsId(), tempList);
             }
         }
+        setStructure();
     }
 
     private void setStructure() {
         this.root = pwbsHelper.getRoot();
-        addChild(root, 0);
+        addChild(root);
     }
 
-    private void addChild(TreeItem treeItem, Integer wbsId) {
+    private void addChild(TreeItem treeItem) {
         if (treeItem.getChildren().size() > 0) {
             for (Object child : treeItem.getChildren()) {
                 TreeItem childItem = (TreeItem) child;
-                PWBS pwbs = (PWBS) treeItem.getValue();
-                addChild(childItem, pwbs.getMndId());
+                addChild(childItem);
             }
         }
-        PWBS pwbs = (PWBS) treeItem.getValue();
-        if (activityMap.containsKey(pwbs.getMndId())) {
-            treeItem.getChildren().addAll(activityMap.get(pwbs.getMndId()));
+        if (treeItem.getValue().getClass().equals(PWBS.class)) {
+            PWBS pwbs = (PWBS) treeItem.getValue();
+            if (activityMap.containsKey(pwbs.getMndId())) {
+                for (PActivity activity : activityMap.get(pwbs.getMndId())) {
+                    treeItem.getChildren().add(new TreeItem<>(activity));
+                }
+            }
         }
     }
 
