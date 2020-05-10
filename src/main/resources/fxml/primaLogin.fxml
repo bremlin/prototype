@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prototype.controllers.PrimaLoginController">
+   <children>
+      <AnchorPane prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: red;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="109.0" layoutY="24.0" text="Вход в Oracle Primavera P6" textFill="WHITE" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="30.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="104.0" layoutY="67.0" text="Логин" textFill="WHITE" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="70.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="90.0" layoutY="103.0" text="Пароль" textFill="WHITE" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="105.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="loginField" layoutX="159.0" layoutY="63.0" prefWidth="210.0" promptText="Ваш логин Primavera" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="70.0" />
+            <PasswordField fx:id="passwordField" layoutX="159.0" layoutY="99.0" onKeyPressed="#keyPressed" prefWidth="210.0" promptText="Ваш пароль Primavera" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="105.0" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="93.0" layoutY="171.0" text="Сервер" AnchorPane.rightAnchor="270.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="93.0" layoutY="208.0" text="База данных" AnchorPane.rightAnchor="270.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="serverComboBox" layoutX="168.0" layoutY="167.0" prefWidth="210.0" AnchorPane.rightAnchor="50.0" />
+      <ComboBox fx:id="dbComboBox" layoutX="179.0" layoutY="204.0" prefWidth="210.0" AnchorPane.rightAnchor="50.0" />
+      <Separator layoutX="87.0" layoutY="244.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Button fx:id="configServerButton" layoutX="329.0" layoutY="167.0" mnemonicParsing="false" onAction="#configServer" prefWidth="25.0" style="-fx-background-image: url('images/config.png'); -fx-background-repeat: no-repeat; -fx-background-position: 50%" AnchorPane.rightAnchor="15.0" />
+      <Button layoutX="303.0" layoutY="261.0" mnemonicParsing="false" onAction="#cancelButton" text="Отмена" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="50.0" />
+      <Button fx:id="loginButton" layoutX="235.0" layoutY="255.0" mnemonicParsing="false" onAction="#login" text="Вход" AnchorPane.bottomAnchor="15.0" />
+   </children>
+</AnchorPane>
