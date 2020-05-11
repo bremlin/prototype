@@ -25,29 +25,30 @@ public class ConfigSql implements Serializable {
     public ConfigSql() {
         File file = new File(directory + "\\" + fileName);
         if (file.exists() && file.length() > 0) {
-            ArrayList<SqlConfig> configList = new ArrayList<>();
+            SqlConfig config = null;
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file.getAbsolutePath()))) {
-                configList = (ArrayList<SqlConfig>) ois.readObject();
+                config = (SqlConfig) ois.readObject();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            for (SqlConfig sqlConfig : configList) {
-                switch (sqlConfig.getType()) {
-                    case Factage:
-                        factageConfigs.add(sqlConfig);
-                        if (sqlConfig.isDefaultServer()) factageServer = sqlConfig;
-                        break;
-                    case Infactage:
-                        infactageConfigs.add(sqlConfig);
-                        if (sqlConfig.isDefaultServer()) infactageServer = sqlConfig;
-                        break;
-                    case Primavera:
-                        primaConfigs.add(sqlConfig);
-                        if (sqlConfig.isDefaultServer()) primaServer = sqlConfig;
-                        break;
-                }
-            }
-        } else {
+//            for (SqlConfig sqlConfig : configList) {
+//                switch (sqlConfig.getType()) {
+//                    case Factage:
+//                        factageConfigs.add(sqlConfig);
+//                        if (sqlConfig.isDefaultServer()) factageServer = sqlConfig;
+//                        break;
+//                    case Infactage:
+//                        infactageConfigs.add(sqlConfig);
+//                        if (sqlConfig.isDefaultServer()) infactageServer = sqlConfig;
+//                        break;
+//                    case Primavera:
+                        primaConfigs.add(config);
+//                        if (sqlConfig.isDefaultServer()) primaServer = sqlConfig;
+//                        break;
+
+            primaServer = config;
+//                }
+            } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Конфигурация подключения Factage");
             alert.setHeaderText("Отсутствует или повреждён файл конфигурации Factage");
