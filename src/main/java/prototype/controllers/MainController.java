@@ -1,6 +1,9 @@
 package prototype.controllers;
 
+import com.primavera.ServerException;
+import com.primavera.integration.client.bo.BusinessObjectException;
 import com.primavera.integration.network.NetworkException;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +20,7 @@ import prototype.HandlerXls;
 import prototype.config.ConfigSql;
 import prototype.config.MsSqlConnect;
 import prototype.config.SqlConfig;
+import prototype.helpers.ResourceHelper;
 import prototype.objects.PActivity;
 import prototype.primavera.dLogin;
 import prototype.utils.TableUtils;
@@ -44,7 +48,7 @@ public class MainController {
     @FXML
     public TreeView relationMndResourceTree;
     @FXML
-    public TreeView relationPrimaveraResourceTree;
+    public TableView relationPrimaveraResourceTree;
 
     private Image indicatorOffImage;
     private Image indicatorOnImage;
@@ -83,7 +87,8 @@ public class MainController {
         resourceTable.getColumns().add(tableUtils.addColumnValue());
         resourceTable.getColumns().add(tableUtils.addColumnPvApply());
 
-
+        relationPrimaveraResourceTree.getColumns().add(tableUtils.addColumnId());
+        relationPrimaveraResourceTree.getColumns().add(tableUtils.addColumnName());
     }
 
     private void setIndicatorOn(Label indicator) {
@@ -150,12 +155,22 @@ public class MainController {
         try {
             if (dLogin.session != null && dLogin.session.isValid()) {
                 loginStatus = true;
+                setIndicatorOn(primaveraIndicator);
+                ResourceHelper resourceHelper = new ResourceHelper(dLogin.session);
+                resourceHelper.run();
+                relationPrimaveraResourceTree.getItems().addAll(resourceHelper.getResource());
+
+                System.out.println("test");
             } else {
                 loginStatus = false;
 //                logInOut();
             }
 //            logInOut();
         } catch (NetworkException e) {
+            e.printStackTrace();
+        } catch (BusinessObjectException e) {
+            e.printStackTrace();
+        } catch (ServerException e) {
             e.printStackTrace();
         }
     }
@@ -217,5 +232,9 @@ public class MainController {
                 resourceTable.getItems().clear();
             }
         }
+    }
+
+    public void createProjectAction(ActionEvent actionEvent) {
+
     }
 }

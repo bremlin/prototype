@@ -28,6 +28,7 @@
           <Menu mnemonicParsing="false" text="Primavera">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#primaConnect" text="Подключиться" />
+                  <MenuItem mnemonicParsing="false" onAction="#createProjectAction" text="Создать проект" />
                   <MenuItem mnemonicParsing="false" onAction="#primaSettings" text="Настройки" />
             </items>
           </Menu>
@@ -153,7 +154,7 @@
                                                       <Label text="Primavera" />
                                                    </items>
                                                 </ToolBar>
-                                                <TreeView fx:id="relationPrimaveraResourceTree" layoutX="55.0" layoutY="105.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                                                <TableView fx:id="relationPrimaveraResourceTree" layoutX="55.0" layoutY="105.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
                                              </children>
                                           </AnchorPane>
                                       </items>

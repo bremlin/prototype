@@ -8,6 +8,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import prototype.objects.PResourceAssignment;
 
 public class TableUtils {
+
+    public TableColumn<PResourceAssignment, String> addColumnId() {
+        TableColumn<PResourceAssignment, String> column = new TableColumn("ID");
+        column.setCellValueFactory(new PropertyValueFactory("id"));
+        column.setPrefWidth(column.getPrefWidth() * 3.0D);
+        return column;
+    }
+
     public TableColumn<PResourceAssignment, String> addColumnName() {
         TableColumn<PResourceAssignment, String> column = new TableColumn("Наименование");
         column.setCellValueFactory(new PropertyValueFactory("type"));
