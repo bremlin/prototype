@@ -23,6 +23,10 @@ import prototype.config.SqlConfig;
 import prototype.helpers.EPSHelper;
 import prototype.helpers.ResourceHelper;
 import prototype.objects.PActivity;
+import prototype.objects.PEPS;
+import prototype.objects.PProject;
+import prototype.objects.PResource;
+import prototype.primavera.CreateProject;
 import prototype.primavera.dLogin;
 import prototype.utils.TableUtils;
 import prototype.utils.TreeTableUtils;
@@ -47,7 +51,7 @@ public class MainController {
     @FXML
     public TreeView wbsTree;
     @FXML
-    public TreeView relationMndResourceTree;
+    public TreeView relationMndResourceTable;
     @FXML
     public TableView relationPrimaveraResourceTree;
     @FXML
@@ -92,6 +96,8 @@ public class MainController {
 
         relationPrimaveraResourceTree.getColumns().add(tableUtils.addColumnId());
         relationPrimaveraResourceTree.getColumns().add(tableUtils.addColumnName());
+
+        relationMndResourceTable.setShowRoot(false);
     }
 
     private void setIndicatorOn(Label indicator) {
@@ -122,6 +128,7 @@ public class MainController {
         wbsTree.setRoot(handlerXls.getPwbsHelper().getRoot());
         activityTreeView.setRoot(handlerXls.getpActivityHelper().getRoot());
         activityTreeView.setShowRoot(false);
+        relationMndResourceTable.setRoot(handlerXls.getpResourceAssignmentHelper().getResourceList());
     }
 
     public void close(ActionEvent actionEvent) {
@@ -218,7 +225,16 @@ public class MainController {
     }
 
     public void addRelation(ActionEvent actionEvent) {
+        if (relationMndResourceTable.getSelectionModel().getSelectedItem() != null &&
+        relationPrimaveraResourceTree.getSelectionModel().getSelectedItem() != null) {
+            TreeItem selectedMnd = (TreeItem) relationMndResourceTable.getSelectionModel().getSelectedItem();
+            TreeItem selectedPrima = (TreeItem) relationPrimaveraResourceTree.getSelectionModel().getSelectedItem();
 
+            String selectedMndString = (String) selectedMnd.getValue();
+            PResource pResource = (PResource) selectedPrima.getValue();
+
+            handlerXls.setRelationResource(selectedMndString, pResource);
+        }
     }
 
     public void removeRelation(ActionEvent actionEvent) {
@@ -241,7 +257,20 @@ public class MainController {
     }
 
     public void createProjectAction(ActionEvent actionEvent) {
+        if (epsTreeView.getSelectionModel().getSelectedItem() != null) {
+            TreeItem selectedItem = (TreeItem) epsTreeView.getSelectionModel().getSelectedItem();
+            PEPS selectedEps = (PEPS) selectedItem.getValue();
 
+            CreateProject createProject = new CreateProject(selectedEps, handlerXls, new PProject());
+            try {
+                createProject.create();
+            } catch (BusinessObjectException | ServerException | NetworkException e) {
+                e.printStackTrace();
+            }
+            System.out.println("eps: " + selectedEps.getName());
+        } else {
+            System.out.println("не выбран eps");
+        }
     }
 
     public void setEPS(MouseEvent mouseEvent) {

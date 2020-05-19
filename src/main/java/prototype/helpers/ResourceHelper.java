@@ -18,6 +18,8 @@ public class ResourceHelper {
     private HashMap<Integer, PResource> resourceMap = new HashMap<>();
     private HashMap<Integer, ArrayList<PResource>> relationResourceMap = new HashMap<>();
 
+    private HashMap<Integer, PResource> mndResource = new HashMap<>();
+
     public ResourceHelper(Session session) {
         this.session = session;
     }

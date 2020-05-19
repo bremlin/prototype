@@ -23,6 +23,11 @@ public class PProject extends PObject {
         }
     }
 
+    public PProject() {
+        this.id = "T1";
+        this.name = "Test Project";
+    }
+
     @Override
     public String toString() {
         return id + '\'' +

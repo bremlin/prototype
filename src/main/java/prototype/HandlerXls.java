@@ -8,6 +8,7 @@ import prototype.helpers.PActivityHelper;
 import prototype.helpers.PResourceAssignmentHelper;
 import prototype.helpers.PWBSHelper;
 import prototype.objects.PActivity;
+import prototype.objects.PResource;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +22,7 @@ public class HandlerXls {
     private PWBSHelper pwbsHelper;
     private PActivityHelper pActivityHelper;
     private PResourceAssignmentHelper pResourceAssignmentHelper;
+    private HashMap<String, PResource> mapResources = new HashMap<>();
 
     public HandlerXls(File mndXls) {
         this.mndXls = mndXls;
@@ -46,5 +48,13 @@ public class HandlerXls {
 
     public PResourceAssignmentHelper getpResourceAssignmentHelper() {
         return pResourceAssignmentHelper;
+    }
+
+    public void setRelationResource(String mndResource, PResource primaResource) {
+        mapResources.put(mndResource, primaResource);
+    }
+
+    public PResource getResourcePrima(String resource) {
+        return mapResources.get(resource);
     }
 }

@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class PWBSHelper {
 
     private HashMap<Integer, ArrayList<PWBS>> wbsMap = new HashMap<>();
+    private HashMap<Integer, PWBS> wbss = new HashMap<>();
     private TreeItem root;
 
     public PWBSHelper(Sheet sheet) {
@@ -18,6 +19,7 @@ public class PWBSHelper {
         for (Row row : sheet) {
             if (i++ < 1) continue;
             PWBS pwbs = new PWBS(row);
+            wbss.put(pwbs.getMndId(), pwbs);
             if (wbsMap.containsKey(pwbs.getParentId())) {
                 wbsMap.get(pwbs.getParentId()).add(pwbs);
             } else {
@@ -49,4 +51,12 @@ public class PWBSHelper {
     public TreeItem getRoot() {
         return root;
     }
+
+    public HashMap<Integer, PWBS> getWbss() {
+        return wbss;
+    }
+
+//    public String getWbsName(Integer id) {
+//
+//    }
 }

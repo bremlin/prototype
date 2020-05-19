@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import prototype.objects.PObject;
 import prototype.objects.PResourceAssignment;
 
 public class TableUtils {
@@ -19,6 +20,13 @@ public class TableUtils {
     public TableColumn<PResourceAssignment, String> addColumnName() {
         TableColumn<PResourceAssignment, String> column = new TableColumn("Наименование");
         column.setCellValueFactory(new PropertyValueFactory("type"));
+        column.setPrefWidth(column.getPrefWidth() * 3.0D);
+        return column;
+    }
+
+    public TableColumn<PObject, String> addColumnNameResource() {
+        TableColumn<PObject, String> column = new TableColumn("Наименование");
+        column.setCellValueFactory(new PropertyValueFactory("name"));
         column.setPrefWidth(column.getPrefWidth() * 3.0D);
         return column;
     }
