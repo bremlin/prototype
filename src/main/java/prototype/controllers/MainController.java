@@ -20,6 +20,7 @@ import prototype.HandlerXls;
 import prototype.config.ConfigSql;
 import prototype.config.MsSqlConnect;
 import prototype.config.SqlConfig;
+import prototype.helpers.EPSHelper;
 import prototype.helpers.ResourceHelper;
 import prototype.objects.PActivity;
 import prototype.primavera.dLogin;
@@ -49,6 +50,8 @@ public class MainController {
     public TreeView relationMndResourceTree;
     @FXML
     public TableView relationPrimaveraResourceTree;
+    @FXML
+    public TreeView epsTreeView;
 
     private Image indicatorOffImage;
     private Image indicatorOnImage;
@@ -160,6 +163,9 @@ public class MainController {
                 resourceHelper.run();
                 relationPrimaveraResourceTree.getItems().addAll(resourceHelper.getResource());
 
+                EPSHelper epsHelper = new EPSHelper(dLogin.session);
+                epsHelper.load();
+                epsTreeView.setRoot(epsHelper.getRootItem());
                 System.out.println("test");
             } else {
                 loginStatus = false;
@@ -235,6 +241,10 @@ public class MainController {
     }
 
     public void createProjectAction(ActionEvent actionEvent) {
+
+    }
+
+    public void setEPS(MouseEvent mouseEvent) {
 
     }
 }

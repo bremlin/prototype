@@ -6,7 +6,6 @@ import com.primavera.integration.client.bo.BOIterator;
 import com.primavera.integration.client.bo.BusinessObjectException;
 import com.primavera.integration.client.bo.object.Resource;
 import com.primavera.integration.network.NetworkException;
-import javafx.concurrent.Task;
 import prototype.objects.PResource;
 
 import java.util.ArrayList;

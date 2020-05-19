@@ -13,6 +13,7 @@ public class PActivityHelper {
 
     private HashMap<Integer, ArrayList<PActivity>> activityMap = new HashMap<>();
     private PWBSHelper pwbsHelper;
+    private ArrayList<PActivity> activityList = new ArrayList<>();
 
     private TreeItem root;
 
@@ -23,6 +24,7 @@ public class PActivityHelper {
         for (Row row : sheet) {
             if (i++ < 1) continue;
             PActivity activity = new PActivity(row);
+            activityList.add(activity);
             if (activityMap.containsKey(activity.getWbsId())) {
                 activityMap.get(activity.getWbsId()).add(activity);
             } else {
@@ -58,5 +60,9 @@ public class PActivityHelper {
 
     public TreeItem getRoot() {
         return root;
+    }
+
+    public ArrayList<PActivity> getActivityList() {
+        return activityList;
     }
 }
